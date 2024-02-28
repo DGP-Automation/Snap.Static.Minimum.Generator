@@ -1,0 +1,2 @@
+# Snap.Static.Minimum.Generator
+ 
