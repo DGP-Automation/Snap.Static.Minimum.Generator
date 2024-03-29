@@ -114,3 +114,5 @@ if __name__ == "__main__":
     for f in emotion_icon_file_list:
         if f in emotion_list:
             shutil.copy(f"./EmotionIcon/{f}", f"./EmotionIcon-Minimum/{f}")
+    # Delete cache file
+    os.remove('Uri.xaml')
