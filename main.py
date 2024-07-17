@@ -81,7 +81,7 @@ def item_icon_parser() -> list:
 
 def emotion_icon_parser() -> list:
     EMOTION_METADATA_URL = ("https://raw.githubusercontent.com/DGP-Studio/Snap.Hutao/main/src/Snap.Hutao/Snap.Hutao"
-                            "/Control/Theme/Uri.xaml")
+                            "/UI/Xaml/Control/Theme/Uri.xaml")
     return_list = []
 
     response = requests.get(EMOTION_METADATA_URL).content
