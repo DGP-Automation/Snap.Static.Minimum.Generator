@@ -1,10 +1,10 @@
 import requests
-import xml.etree.ElementTree as ET
+import xml.etree.ElementTree as eTree
 import os
 import shutil
 
 
-def avatar_skill_parser(skill: dict) -> str:
+def avatar_skill_parser(skill: dict) -> str | None:
     try:
         if "Icon" in skill.keys():
             resource_name = skill["Icon"]
@@ -13,7 +13,8 @@ def avatar_skill_parser(skill: dict) -> str:
             elif "talent" in resource_name.lower():
                 return "Talent"
             else:
-                print(f"Unrecognized resource name: {resource_name}.")
+                raise RuntimeError(f"Unrecognized skill name: {resource_name}.")
+        return None
     except (KeyError, AttributeError):
         raise RuntimeError(f"Error parsing skill: {skill}.")
 
@@ -85,9 +86,9 @@ def emotion_icon_parser() -> list:
     return_list = []
 
     response = requests.get(EMOTION_METADATA_URL).content
-    with open('Uri.xaml', 'wb') as f:
-        f.write(response)
-    tree = ET.parse('Uri.xaml')
+    with open('Uri.xaml', 'wb') as xaml_file:
+        xaml_file.write(response)
+    tree = eTree.parse('Uri.xaml')
     root = tree.getroot()
     for child in root:
         icon_name = list(child.attrib.values())[0] + ".png"
